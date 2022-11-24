@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  TZ: Europe/Tallinn
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: idoit-env
+  name: env
