@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   creationTimestamp: null
   labels:
-    io.kompose.service: idoit-upload
+    app: cmdb
   name: idoit-upload
 spec:
   accessModes:
