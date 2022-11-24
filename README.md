@@ -1,0 +1,1 @@
+repo for deploying i-doit image to rancher rke2 cluster
