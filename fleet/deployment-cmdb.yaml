@@ -1,45 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
+  name: cmdb
   labels:
     app: cmdb
-  name: cmdb
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: cmdb
-  strategy:
-    type: Recreate
   template:
     metadata:
       creationTimestamp: null
       labels:
         app: cmdb
     spec:
-#      securityContext:
-#        runAsUser: 1000
-#        runAsGroup: 1000
-#        fsGroup: 1000
-      containers:
-      - image: jurikaur/i-doit:1.19
-        name: cmdb
-        env:
-          - name: TZ
-            valueFrom:
-              configMapKeyRef:
-                key: TZ
-                name: env
-        ports:
-          - containerPort: 80
-        resources: {}
-        volumeMounts:
-          - mountPath: /var/www/html/i-doit/src
-            name: idoit-src
-          - mountPath: /var/www/html/i-doit/upload
-            name: idoit-upload
-      restartPolicy: Always
       volumes:
         - name: idoit-upload
           persistentVolumeClaim:
@@ -47,4 +22,22 @@ spec:
         - name: idoit-src
           persistentVolumeClaim:
             claimName: idoit-src
-status: {}
+      containers:
+        - name: cmdb
+          image: 'jurikaur/i-doit:1.19'
+          ports:
+            - name: cmdb
+              containerPort: 80
+              protocol: TCP
+          env:
+            - name: TZ
+              valueFrom:
+                configMapKeyRef:
+                  key: TZ
+                  name: env
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/www/html/i-doit/src
+              name: idoit-src
+            - mountPath: /var/www/html/i-doit/upload
+              name: idoit-upload
