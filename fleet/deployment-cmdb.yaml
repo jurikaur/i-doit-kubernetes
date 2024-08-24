@@ -24,7 +24,7 @@ spec:
             claimName: idoit-src
       containers:
         - name: cmdb
-          image: 'jurikaur/i-doit:1.19'
+          image: 'jurikaur/i-doit:32'
           ports:
             - name: cmdb
               containerPort: 80
